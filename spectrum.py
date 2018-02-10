@@ -3,14 +3,18 @@ import json
 import urllib2
 import urllib
 import ConfigParser
+import httplib
 
 config=ConfigParser.RawConfigParser()
 config.read('spectrum.cfg')
 username=config.get('credentials','username')
 password=config.get('credentials','password')
 serverList=config.get('spectrum','servers').split(',')
-print username
-print password
+dburl=config.get('influxdb','db_url')
+dbuser=config.get('influxdb','db_user')
+dbuser=config.get('influxdb','db_password')
+dbname=config.get('influxdb','db_name')
+
 values = {'j_username' : username,
           'j_password' : password}
 
@@ -35,6 +39,11 @@ def fetchp(uri, data):
 def dump():
     for cookie in cookies:
         print cookie.name, cookie.value
+
+def writedb(data):
+    pass
+
+
 for server in serverList:
   print server
 
