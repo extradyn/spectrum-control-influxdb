@@ -41,8 +41,12 @@ def dump():
         print cookie.name, cookie.value
 
 def writedb(data):
+    headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
+    conn=httplib.HTTPConnection(dburl)
+    conn.request('POST', '', data, headers)
     pass
 
+writedb("CREATE DATABASE " + dbname)
 
 for server in serverList:
   print server
